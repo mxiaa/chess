@@ -50,7 +50,8 @@ public class Piece {
     //return a list of every square that is "controlled" by this piece. A square is controlled
     //if the piece capture into it legally.
     public ArrayList<Square> getControlledSquares(Square[][] board, Square start) {
-     return null;
+      //This peice will never land on the King. It is a mistery where it will land next, so it controls no peices
+     return new ArrayList();
     }
     
 
@@ -61,6 +62,16 @@ public class Piece {
     //please note that your piece must have some sort of logic. Just being able to move to every square on the board is not
     //going to score any points.
     public ArrayList<Square> getLegalMoves(Board b, Square start){
-    	return null;
+      ArrayList<Square> moves = new ArrayList<Square>();
+      int sRow = start.getRow();
+      int sCol = start.getCol();
+      int col = (int)(Math.random()*8);
+      int row = (int)(Math.random()*8);
+        while(!b.getSquareArray()[row][col].isOccupied() || b.getSquareArray()[row][col].getOccupyingPiece().getColor() == b.getSquareArray()[sRow][sCol].getOccupyingPiece().getColor() || b.getSquareArray()[row][col].getOccupyingPiece() instanceof King){
+          col = (int)(Math.random()*8);
+          row = (int)(Math.random()*8);
+        }
+        moves.add(b.getSquareArray()[row][col]);
+    	return moves;
     }
 }
