@@ -178,11 +178,14 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         
         //using currPiece
         
-       
+        if (legalMoves [](Point) >0 && b.getSquareArray()[row][col].getOccupyingPiece().getColor() == b.getSquareArray()[sRow][sCol].currpeice().getColor() ){
+            board.endSquare.put(currPiece)
+        }
         fromMoveSquare.setDisplay(true);
-        currPiece = null;
+        currPiece=null;
         repaint();
     }
+       
 
     @Override
     public void mouseDragged(MouseEvent e) {
