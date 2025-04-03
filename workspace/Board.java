@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+
 import javax.swing.*;
 
 //You will be implmenting a part of a function and a whole function in this document. Please follow the directions for the 
@@ -30,8 +31,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
 	private static final String RESOURCES_BKING_PNG = "bking.png";
 	private static final String RESOURCES_BQUEEN_PNG = "bqueen.png";
 	private static final String RESOURCES_WQUEEN_PNG = "wqueen.png";
-	private static final String RESOURCES_WPAWN_PNG = "wpawn.png";
-	private static final String RESOURCES_BPAWN_PNG = "bpawn.png";
+	private static final String RESOURCES_WPAWN_PNG = "WANTIPAWN.png";
+	private static final String RESOURCES_BPAWN_PNG = "BANTIPAWN.png";
 	
 	// Logical and graphical representations of board
 	private final Square[][] board;
@@ -99,14 +100,39 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
     private void initializePieces() {
     	
     	board[7][4].put(new King(true, RESOURCES_WKING_PNG));
-        board[6][0].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[6][1].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[6][2].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[6][3].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[6][4].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[6][5].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[6][6].put(new Piece(true, RESOURCES_WPAWN_PNG));
-        board[6][7].put(new Piece(true, RESOURCES_WPAWN_PNG));
+        board[7][3].put(new WeepingQueen(true, RESOURCES_WQUEEN_PNG));
+        board[7][2].put(new Assassin(true, RESOURCES_WBISHOP_PNG));
+        board[7][5].put(new Assassin(true, RESOURCES_WBISHOP_PNG));
+        board[6][0].put(new AntiPawn(true, RESOURCES_WPAWN_PNG));
+        board[6][1].put(new AntiPawn(true, RESOURCES_WPAWN_PNG));
+        board[6][2].put(new AntiPawn(true, RESOURCES_WPAWN_PNG));
+        board[6][3].put(new AntiPawn(true, RESOURCES_WPAWN_PNG));
+        board[6][4].put(new AntiPawn(true, RESOURCES_WPAWN_PNG));
+        board[6][5].put(new AntiPawn(true, RESOURCES_WPAWN_PNG));
+        board[6][6].put(new AntiPawn(true, RESOURCES_WPAWN_PNG));
+        board[6][7].put(new AntiPawn(true, RESOURCES_WPAWN_PNG));
+        board[7][6].put(new Servant(true, RESOURCES_WKNIGHT_PNG));
+        board[7][1].put(new Servant(true, RESOURCES_WKNIGHT_PNG));
+        board[7][0].put(new Church(true, RESOURCES_WROOK_PNG));
+        board[7][7].put(new Church(true, RESOURCES_WROOK_PNG));
+
+        board[0][3].put(new King(true, RESOURCES_BKING_PNG));
+        board[0][4].put(new WeepingQueen(true, RESOURCES_BQUEEN_PNG));
+        board[0][2].put(new Assassin(true, RESOURCES_BBISHOP_PNG));
+        board[0][5].put(new Assassin(true, RESOURCES_BBISHOP_PNG));
+        board[1][0].put(new AntiPawn(true, RESOURCES_BPAWN_PNG));
+        board[1][1].put(new AntiPawn(true, RESOURCES_BPAWN_PNG));
+        board[1][2].put(new AntiPawn(true, RESOURCES_BPAWN_PNG));
+        board[1][3].put(new AntiPawn(true, RESOURCES_BPAWN_PNG));
+        board[1][4].put(new AntiPawn(true, RESOURCES_BPAWN_PNG));
+        board[1][5].put(new AntiPawn(true, RESOURCES_BPAWN_PNG));
+        board[1][6].put(new AntiPawn(true, RESOURCES_BPAWN_PNG));
+        board[1][7].put(new AntiPawn(true, RESOURCES_BPAWN_PNG));
+        board[0][6].put(new Servant(true, RESOURCES_BKNIGHT_PNG));
+        board[0][1].put(new Servant(true, RESOURCES_BKNIGHT_PNG));
+        board[0][0].put(new Church(true, RESOURCES_BROOK_PNG));
+        board[0][7].put(new Church(true, RESOURCES_BROOK_PNG));
+
        
 
     }
@@ -126,6 +152,22 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
     public Piece getCurrPiece() {
         return this.currPiece;
     }
+
+    //precondition - the board is initialized and contains a king of either color. The boolean kingColor corresponds to the color of the king we wish to know the status of.
+    //postcondition - returns true of the king is in check and false otherwise.
+	public boolean isInCheck(boolean kingColor){
+		for(int row = 0; row < 8; row++){
+            for(int col = 0; col < 8; col++){
+                if(b.getSquareArray()[row][col].getOccupyingPiece().getColor() != kingColor){
+                    if(b.getSquareArray()[row][col].getOccupyingPiece().getControlledSquares().contains(b.getSquareArray() instanceof King)){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
 
     @Override
     public void paintComponent(Graphics g) {
@@ -178,8 +220,8 @@ public class Board extends JPanel implements MouseListener, MouseMotionListener 
         
         //using currPiece
         
-        if (legalMoves [](Point) >0 && b.getSquareArray()[row][col].getOccupyingPiece().getColor() == b.getSquareArray()[sRow][sCol].currpeice().getColor() ){
-            board.endSquare.put(currPiece)
+        if (currPiece.legalMoves[](Point) >0 && isInCheck(currPiece.getColor()) = false ){
+            board.endSquare.put(currPiece);
         }
         fromMoveSquare.setDisplay(true);
         currPiece=null;

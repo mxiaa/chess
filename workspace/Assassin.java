@@ -1,6 +1,6 @@
+//This peice teleports to a randomly chosen opponant that is not the king
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 
 public class Assassin extends Piece{
@@ -10,7 +10,7 @@ public class Assassin extends Piece{
     }
 
     public String toString(){
-        return "A " + super.toString() + " assassin" 
+        return "A " + super.toString() + " assassin" ;
     }
 
      //This peice will never land on the King. It is a mystery where it will land next, so it controls no peices
